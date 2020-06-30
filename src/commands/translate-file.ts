@@ -4,7 +4,13 @@
  * translate as the first parameter and the the target language as a flag
  */
 import {Command, flags} from '@oclif/command'
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs'
+import axios from 'axios'
+
+interface ApiData {
+  target_language_code: string;
+  text: string;
+}
 
 export default class TranslateFile extends Command {
   static description = 'Translates a file and generates a new file containing the tranlsations'
@@ -22,9 +28,32 @@ export default class TranslateFile extends Command {
 
   static args = [{name: 'file'}]
 
+  async callApi(target_language_code: any, text: any) {
+    const data: ApiData = {
+      target_language_code: target_language_code,
+      text: text,
+    }
+    return axios.post('https://decyphr.uc.r.appspot.com/api/v1/text-to-text/', data)
+    .then(response => {
+      this.log('Response retrieved successfully')
+      return response.data
+    })
+    .catch(error => this.log(error))
+  }
+
+  async parseContents(fileContents: any, target_lang: any) {
+    let translationContents: any = {};
+
+    for (const property in fileContents) {
+      let response = await this.callApi(target_lang, fileContents[property])
+      translationContents[property] = response.translated_text;
+    }
+  }
+
   async run() {
     const {args, flags} = this.parse(TranslateFile);
-    let file = JSON.parse(readFileSync(args.file, 'utf8'));
+    let fileContents = JSON.parse(readFileSync(args.file, 'utf8'));
+    this.parseContents(fileContents, flags.target_lang);
     this.log(`${args.file} - ${flags.target_lang}`);
   }
 }
