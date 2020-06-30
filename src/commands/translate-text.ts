@@ -1,3 +1,8 @@
+/**
+ * translate-test.ts is a straightforward text-to-text translation. In order
+ * to use this command, simple call the command pass the text that you wish to
+ * translate as the first parameter and the the target language as a flag
+ */
 import {Command, flags} from '@oclif/command'
 import axios from 'axios'
 
@@ -10,7 +15,9 @@ export default class TranslateText extends Command {
   static description = 'Translates string of text'
 
   static examples = [
-    '$ decyphr translate_text hello -t pt',
+    '$ decyphr translate-text hello -t pt',
+    '$ decyphr translate-text hello --target_lang pt',
+    '$ decyphr translate-text "tudo bem?" --target_lang en',
   ]
 
   static flags = {
