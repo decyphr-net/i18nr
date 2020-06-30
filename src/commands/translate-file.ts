@@ -7,7 +7,7 @@ import {Command, flags} from '@oclif/command'
 import { readFileSync } from 'fs';
 
 export default class TranslateFile extends Command {
-  static description = 'Translates a generates a new file containing the tranlsations'
+  static description = 'Translates a file and generates a new file containing the tranlsations'
 
   static examples = [
     '$ decyphr translate-file en.json -t pt',
