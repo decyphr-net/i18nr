@@ -35,7 +35,6 @@ export default class TranslateFile extends Command {
     }
     return axios.post('https://decyphr.uc.r.appspot.com/api/v1/text-to-text/', data)
     .then(response => {
-      this.log('Response retrieved successfully')
       return response.data
     })
     .catch(error => this.log(error))
@@ -48,12 +47,15 @@ export default class TranslateFile extends Command {
       let response = await this.callApi(target_lang, fileContents[property])
       translationContents[property] = response.translated_text;
     }
+
+    return translationContents;
   }
 
   async run() {
     const {args, flags} = this.parse(TranslateFile);
     let fileContents = JSON.parse(readFileSync(args.file, 'utf8'));
-    this.parseContents(fileContents, flags.target_lang);
-    this.log(`${args.file} - ${flags.target_lang}`);
+    let contents = await this.parseContents(fileContents, flags.target_lang);
+    writeFileSync(flags.target_lang + '.json', JSON.stringify(contents, null, 2));
+    this.log(`Translation complete`);
   }
 }
