@@ -13,7 +13,7 @@ interface ApiData {
 }
 
 export default class TranslateFile extends Command {
-  static description = 'Translates a file and generates a new file containing the tranlsations'
+  static description = 'Translates a file and generates a new file containing the translations'
 
   static examples = [
     '$ decyphr translate-file en.json -t pt',
@@ -23,7 +23,12 @@ export default class TranslateFile extends Command {
   static flags = {
     help: flags.help({char: 'h'}),
     // flag to determine the target language
-    target_lang: flags.string({char: 't', description: 'Two-character code for the target language'}),
+    target_lang: flags.string(
+      {
+        char: 't',
+        description: 'Two-character code for the target language'
+      }
+    ),
   }
 
   static args = [{name: 'file'}]
@@ -33,7 +38,8 @@ export default class TranslateFile extends Command {
       target_language_code: target_language_code,
       text: text,
     }
-    return axios.post('https://decyphr.uc.r.appspot.com/api/v1/text-to-text/', data)
+    return axios.post(
+      'https://decyphr.uc.r.appspot.com/api/v1/text-to-text/', data)
     .then(response => {
       return response.data
     })
