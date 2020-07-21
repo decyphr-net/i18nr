@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs'
+import {readFileSync, writeFileSync, existsSync, mkdirSync} from 'fs'
 
 export default class FileHandler {
   
@@ -22,7 +22,7 @@ export default class FileHandler {
    * @param outputpath - The directory where the new file will be created 
    */
   constructor(filename: string, outputfilename: string, outputpath?: string) {
-    this._filename = filename;
+    this._filename = filename
     this._outputfilename = outputfilename
     this._outputpath = outputpath || './'
     this._type = '.json'
