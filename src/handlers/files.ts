@@ -1,4 +1,5 @@
 import {readFileSync, writeFileSync, existsSync, mkdirSync} from 'fs'
+import APIInterface from './api'
 
 export default class FileHandler {
   
@@ -6,6 +7,7 @@ export default class FileHandler {
   private _outputfilename: string
   private _type: string
   private _filename: string
+  private _fileContents: any
 
   /**
    * Constructs the `FileHandler` object using the parameters provided by the
@@ -74,16 +76,32 @@ export default class FileHandler {
   async readFile() {
     let file = readFileSync(this._filename, 'utf-8')
     console.info(`contents of ${this._filename} read successfully...`)
-    return JSON.parse(file)
+    this._fileContents = JSON.parse(file)
   }
 
   /**
    * Writes the translated contents to the file specified by the user
+   * 
    * @param contents The translated text in JSON format
    */
   async outputFile(contents: any) {
     let outputTo = await this._constructOutputPath()
     console.info(`writing file contents to ${outputTo}`)
     writeFileSync(outputTo, JSON.stringify(contents, null, 2));
+  }
+
+  async parseFileContents() {
+    const translationContents: any = {}
+    let apiClient = new APIInterface()
+
+    console.info('translating contents now...')
+    for (const property in this._fileContents) {
+      if (Object.prototype.hasOwnProperty.call(this._fileContents, property)) {
+        const response = await apiClient.callApi(
+          this._outputfilename, this._fileContents[property])
+        translationContents[property] = response.translated_text
+      }
+    }
+    return translationContents
   }
 }
