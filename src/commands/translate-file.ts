@@ -4,8 +4,8 @@
  * translate as the first parameter and the the target language as a flag
  */
 import {Command, flags} from '@oclif/command'
-import { readFileSync, writeFileSync } from 'fs'
 import axios from 'axios'
+import FileHandler from '../handlers/files'
 
 interface ApiData {
   target_language_code: string;
@@ -13,7 +13,7 @@ interface ApiData {
 }
 
 export default class TranslateFile extends Command {
-  static description = 'Translates a file and generates a new file containing the translations'
+  static description = 'Translates a JSON file and generates a new file containing the translations'
 
   static examples = [
     '$ decyphr translate-file en.json -t pt',
@@ -23,12 +23,18 @@ export default class TranslateFile extends Command {
   static flags = {
     help: flags.help({char: 'h'}),
     // flag to determine the target language
-    target_lang: flags.string(
+    targetLang: flags.string(
       {
         char: 't',
         description: 'Two-character code for the target language'
-      }
+      },
     ),
+    outputDir: flags.string(
+      {
+        char: 'o',
+        description: 'The dir that you want the new new file to be placed in'
+      }
+    )
   }
 
   static args = [{name: 'file'}]
@@ -47,8 +53,9 @@ export default class TranslateFile extends Command {
   }
 
   async parseContents(fileContents: any, target_lang: any) {
-    let translationContents: any = {};
+    let translationContents: any = {}
 
+    console.info(`translating contents now...`)
     for (const property in fileContents) {
       let response = await this.callApi(target_lang, fileContents[property])
       translationContents[property] = response.translated_text;
@@ -59,9 +66,10 @@ export default class TranslateFile extends Command {
 
   async run() {
     const {args, flags} = this.parse(TranslateFile);
-    let fileContents = JSON.parse(readFileSync(args.file, 'utf8'));
-    let contents = await this.parseContents(fileContents, flags.target_lang);
-    writeFileSync(flags.target_lang + '.json', JSON.stringify(contents, null, 2));
-    this.log(`Translation complete`);
+    let fileHandler = new FileHandler(args.file, flags.targetLang!, flags.outputDir || '');
+    let fileContents = await fileHandler.readFile()
+    let contents = await this.parseContents(fileContents, flags.targetLang)
+    await fileHandler.outputFile(contents)
+    this.log(`task complete`);
   }
 }
