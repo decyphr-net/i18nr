@@ -18,18 +18,20 @@ export default class TranslateFile extends Command {
   static examples = [
     '$ decyphr translate-file en.json -t pt',
     '$ decyphr translate-file en.json --target_lang pt',
+    '$ decyphr translate-file en.json -t pt -o translations/',
+    '$ decyphr translate-file en.json --target_lang pt --output_dir translations/'
   ]
 
   static flags = {
     help: flags.help({char: 'h'}),
     // flag to determine the target language
-    targetLang: flags.string(
+    target_lang: flags.string(
       {
         char: 't',
         description: 'Two-character code for the target language'
       },
     ),
-    outputDir: flags.string(
+    output_dir: flags.string(
       {
         char: 'o',
         description: 'The dir that you want the new new file to be placed in'
@@ -66,9 +68,9 @@ export default class TranslateFile extends Command {
 
   async run() {
     const {args, flags} = this.parse(TranslateFile);
-    let fileHandler = new FileHandler(args.file, flags.targetLang!, flags.outputDir || '');
+    let fileHandler = new FileHandler(args.file, flags.target_lang!, flags.output_dir || '');
     let fileContents = await fileHandler.readFile()
-    let contents = await this.parseContents(fileContents, flags.targetLang)
+    let contents = await this.parseContents(fileContents, flags.target_lang)
     await fileHandler.outputFile(contents)
     this.log(`task complete`);
   }
