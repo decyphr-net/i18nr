@@ -31,7 +31,7 @@ export default class TranslateFile extends Command {
     output_dir: flags.string(
       {
         char: 'o',
-        description: 'The dir that you want the new new file to be placed in',
+        description: 'The dir that you want the new file to be placed in',
       }
     ),
   }

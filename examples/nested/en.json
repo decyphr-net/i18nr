@@ -1,0 +1,40 @@
+{
+  "LandingPage": {
+    "loginbutton": "Login",
+    "registerbutton": "Register",
+    "heroparagraph": "Learn to read a new language faster with",
+    "whatisitheader": "What Is It?",
+    "whatisitparagraph": "Decyphr is a new application for aiding in the learning of new languages.",
+    "whatisitparagraph2": "Learning to read in a new language can be a long a difficult process. It can be frustrating trying to get through a book if don't know the meanings of the words.",
+    "whatisitparagraph3": "Decyphr aims to simplify this process by allowing you to translate phrases from your books into your native language, while also still providing a breakdown of the sentence structure and an audio clip of the sentence in the language that you are learning.",
+    "whatdoesitoffer": {
+      "header": "What Does Decypher Offer?",
+      "paragraph": "Decyphr comes with plenty of functionality ready to help to learn your new language which includes, but is not limited to:",
+      "listitem1": "Timed and structured reading sessions",
+      "listitem2": "Breaks down sentence so you can see which words are verbs, or adjectives or nouns",
+      "listitem3": "Audio clips of translated text so instead of just seeing the translated form, you can also hear it the original language",
+      "listitem4": "Practice sessions that will allow you to practice and reinforce the translations that you learned in your reading sessions",
+      "listitem5": "Provides metrics to enable users to see their performance over time"
+    }
+  },
+  "Accounts": {
+    "RegisterForm": {
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "nativelanguage": "Native Language",
+      "languagebeinglearned": "Language Being Learned",
+      "english": "English",
+      "portuguese": "Portuguese" 
+    },
+    "SignInForm": {
+      "forgotpassword": "Forgot password?",
+      "signup": "Don't have an account? Sign Up",
+      "buttonone": "Sign in",
+      "header": "Sign in",
+      "heading": "Sign Up",
+      "buttontwo": "Sign Up",
+      "signin": "Already have an account? Sign in"
+    }
+  }
+}
