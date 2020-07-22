@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<p align="center">
   <img src="assets/i18nr.png" width="350"/>
 
 
