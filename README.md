@@ -1,58 +1,66 @@
-decyphr-cli
-===========
+<div style="text-align:center">
+  <img src="assets/i18nr.png" width="350"/>
 
-The command line tool for integrating with decyphr services
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/decyphr.svg)](https://npmjs.org/package/decyphr)
-[![Downloads/week](https://img.shields.io/npm/dw/decyphr.svg)](https://npmjs.org/package/decyphr)
-[![License](https://img.shields.io/npm/l/decyphr.svg)](https://github.com/decyphr-net/cli/blob/master/package.json)
+  A command line tool for simplifying the process of translating your application
 
-<!-- toc -->
-* [What Is It](#what-is-it)
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
-# Usage
-<!-- usage -->
-```sh-session
-$ npm install -g decyphr
-$ decyphr COMMAND
-running command...
-$ decyphr (-v|--version|version)
-decyphr/0.1.0 linux-x64 node-v12.18.2
-$ decyphr --help [COMMAND]
-USAGE
-  $ decyphr COMMAND
-...
+  [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
+  [![Version](https://img.shields.io/npm/v/decyphr.svg)](https://npmjs.org/package/decyphr)
+  [![Downloads/week](https://img.shields.io/npm/dw/decyphr.svg)](https://npmjs.org/package/decyphr)
+  [![License](https://img.shields.io/npm/l/decyphr.svg)](https://github.com/decyphr-net/cli/blob/master/package.json)
+</div>
+
+- [What is decyphr-i18nr?](#what-is-decyphr-i18nr)
+  - [What it is](#what-it-is)
+  - [What it isn't](#what-it-isnt)
+- [Getting Started](#getting-started)
+  - [Commands](#commands)
+    - [`translate-file`](#translate-file)
+    - [`translate-text`](#translate-text)
+
+# What is decyphr-i18nr?
+
+## What it is
+
+*decyphr-i18nr* is a command line tool built for the purpose of assisting developers with the process of creating translations for their apps.
+During the development of some web applications I used Google Translate to help me quickly put together translations of my sites, which involved a lot of manual copying and pasting which was tedious, laborious, time consuming and error prone. As a solution for this, I built a server side component to handle the integration with the Google Translate API and *decyphr-i18nr* to send the text to the API to be translated and from that, generate the translation files for the developer. This has sped up development and reduced the amount of silly mistakes of text been pasted into the wrong files, etc.
+
+Simply specify the JSON file you wish to translate and the language that you which to translate it to and it will generate your translations - including the JSON file for that language.
+
+## What it isn't
+
+*decyphr-i18nr* is **not** a substitute for existing internationalization tools. *decyphr-i18nr* is intended to work with your internationalization tool to provide the translations that will be injected to the site via the internationalization tool.
+
+For example, if you are using React, you may be using *react-intl* or *react-i18next* to implement the overall infrastructure, and separating your site content out into a separate JSON file, then you can use *decyphr-i18nr* to translate the initial language into as many other langauges as you choose.
+
+**decyphr-i18nr requires you to have your one JSON file created for your initial langauage, but it will use this JSON structure to generate new files for any languages that you choose**
+
+*decyphr-i18nr* is **not** 100% accurate. Translations are provided by Google Translate, and therefore *decyphr-i18nr* will only be as accurate as Google Translate. With that being said, it is pretty good, but do expect some things to be not quite right.
+
+*decyphr-i18nr* does **not** support much at the moment. So far we only only support simple JSON files, but are working on being as widely supported as possible.
+
+# Getting Started
+
+*decyphr-i18nr* is currently available on [NPM](https://www.npmjs.com/package/decyphr) and can be installed globally with:
+
+```bash
+sudo npm i -g decyphr
 ```
-<!-- usagestop -->
-# Commands
-<!-- commands -->
-* [`decyphr help [COMMAND]`](#decyphr-help-command)
-* [`decyphr translate-file [FILE]`](#decyphr-translate-file-file)
-* [`decyphr translate-text [TEXT]`](#decyphr-translate-text-text)
 
-## `decyphr help [COMMAND]`
+Once installed, the `decyphr` command will be available.
 
-display help for decyphr
+## Commands
+In addition to the `decyphr help` command, `decyphr` currently comes with two commands.
+- `translate-text`
+- `translate-file`
 
-```
-USAGE
-  $ decyphr help [COMMAND]
+### `translate-file`
+`translate-file` will translate a JSON file that you specify and generate the translated file with the language specified.
 
-ARGUMENTS
-  COMMAND  command to show help for
-
-OPTIONS
-  --all  see all commands in CLI
-```
-
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0/src/commands/help.ts)_
-
-## `decyphr translate-file [FILE]`
-
-Translates a JSON file and generates a new file containing the translations
+This takes one required argument of **filename** and one required flag of **-t** or **--target_lang** with one optional parameter of **-o** or **--output_dir** to specify the location of the new translation file.
+- `filename` - the name of the file to translate (can include a path)
+- `-t`/`--target_lang` - a 2-digit language identifier used to inform what the target language is
+- `-o`/`--output_dir` - the path to where you want the file to be output. A filename will be generate, so don't include one. If left blank, the file will be placed the directory that the command is executed in
 
 ```
 USAGE
@@ -60,7 +68,7 @@ USAGE
 
 OPTIONS
   -h, --help                     show CLI help
-  -o, --output_dir=output_dir    The dir that you want the new new file to be placed in
+  -o, --output_dir=output_dir    The dir that you want the new file to be placed in
   -t, --target_lang=target_lang  Two-character code for the target language
 
 EXAMPLES
@@ -70,13 +78,31 @@ EXAMPLES
   $ decyphr translate-file en.json --target_lang pt --output_dir translations/
 ```
 
-_See code: [src/commands/translate-file.ts](https://github.com/decyphr-net/cli/blob/v0.1.0/src/commands/translate-file.ts)_
-
-## `decyphr translate-text [TEXT]`
-
-Translates string of text
-
+Translate a file from English to Portuguese in the current directory -
+```bash
+decyphr translate-file en.json -t pt
+# outputs - a new file named `pt.json` in the current directory
 ```
+
+Or translate the en.json file that's in the `translations` folder and output the Portuguese translations to the same folder -
+```bash
+decyphr translate-file translations/en.json -t pt -o translations/
+# outputs - a new file called `pt.json` in the `translations` directory
+```
+
+The input langauge will be determined based on the content being translated, rather than the name of the file or any other flag.
+
+To see examples of what the output looks like then checkout the `examples` folder. In all cases the source language used was English, and any none `en.json` files were automatically generated using this command.
+
+
+### `translate-text`
+`translate-text` is a simple command that will translate a given piece of text and translate it to the target language.
+
+This takes one required argument of **text** and one required flag of **-t** or **--target_lang**.
+- `text` - a string of text that you want to translate
+- `-t`/`--target_lang` - a 2-digit language identifier used to inform what the target language is
+
+```bash
 USAGE
   $ decyphr translate-text [TEXT]
 
@@ -90,5 +116,21 @@ EXAMPLES
   $ decyphr translate-text "tudo bem?" --target_lang en
 ```
 
-_See code: [src/commands/translate-text.ts](https://github.com/decyphr-net/cli/blob/v0.1.0/src/commands/translate-text.ts)_
-<!-- commandsstop -->
+For example, to translate the word **hello** into Portuguese, thenuse -
+```bash
+decyphr translate-text hello -t pt
+# outputs - "hello" translates to "Olá"
+```
+
+Longer strings of text can also be used -
+```bash
+decyphr translate-text "hello, my name is Aaron" -t pt
+# outputs - "hello, my name is Aaron" translates to "Olá, meu nome é Aaron"
+```
+
+The input language is automatically determined, so you don't need to specify the input language, and you can use any language as input -
+```bash
+decyphr translate-text "esta frase é portuguesa e será traduzida para o francês" -t fr
+# outputs - "esta frase é portuguesa e será traduzida para o francês" translates to "cette phrase est portugaise et sera traduite en français"
+```
+
