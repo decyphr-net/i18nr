@@ -51,6 +51,23 @@ sudo npm i -g decyphr
 
 Once installed, the `decyphr` command will be available.
 
+Or, you can install `decyphr-i18nr` as a dependency in your project with:
+```bash
+npm i --save-dev decyphr
+```
+
+And add it to your npm scripts:
+
+```json
+"translate:pt": "./node_modules/.bin/decyphr translate-file i18n/translations/en.json -t pt -o i18n/translations/"
+```
+
+This way you can just run translate your projects with an npm command:
+
+```bash
+npm run translate:pt
+```
+
 ## Commands
 In addition to the `decyphr help` command, `decyphr` currently comes with two commands.
 - `translate-text`
