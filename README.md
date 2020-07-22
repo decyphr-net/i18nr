@@ -162,4 +162,3 @@ The input language is automatically determined, so you don't need to specify the
 decyphr translate-text "esta frase é portuguesa e será traduzida para o francês" -t fr
 # outputs - "esta frase é portuguesa e será traduzida para o francês" translates to "cette phrase est portugaise et sera traduite en français"
 ```
-
