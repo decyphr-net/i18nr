@@ -1,12 +1,12 @@
 {
   "name": "decyphr",
-  "description": "The command line tool for integrating with decyphr services",
+  "description": "A command line tool for simplifying process of translating your application",
   "version": "0.1.0",
   "author": "Aaron Sinnott @aaronsnig501",
   "bin": {
     "decyphr": "./bin/run"
   },
-  "bugs": "https://github.com/decyphr-net/cli/issues",
+  "bugs": "https://github.com/decyphr-net/i18nr/issues",
   "dependencies": {
     "@oclif/command": "^1.6.1",
     "@oclif/config": "^1.15.1",
@@ -39,9 +39,14 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/decyphr-net/cli",
+  "homepage": "https://github.com/decyphr-net/i18nr",
   "keywords": [
-    "oclif"
+    "oclif",
+    "translator",
+    "translations",
+    "translate",
+    "internationalization",
+    "i18n"
   ],
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -52,7 +57,7 @@
       "@oclif/plugin-help"
     ]
   },
-  "repository": "decyphr-net/cli",
+  "repository": "decyphr-net/i18nr",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint . --ext .ts --config .eslintrc",
