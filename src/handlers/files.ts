@@ -7,7 +7,8 @@ export default class FileHandler {
   private _outputfilename: string
   private _type: string
   private _filename: string
-  private _fileContents: any
+  private _apiClient = new APIInterface()
+  public fileContents: any
 
   /**
    * Constructs the `FileHandler` object using the parameters provided by the
@@ -76,7 +77,7 @@ export default class FileHandler {
   async readFile() {
     let file = readFileSync(this._filename, 'utf-8')
     console.info(`contents of ${this._filename} read successfully...`)
-    this._fileContents = JSON.parse(file)
+    this.fileContents = JSON.parse(file)
   }
 
   /**
@@ -90,18 +91,19 @@ export default class FileHandler {
     writeFileSync(outputTo, JSON.stringify(contents, null, 2));
   }
 
-  async parseFileContents() {
-    const translationContents: any = {}
-    let apiClient = new APIInterface()
-
-    console.info('translating contents now...')
-    for (const property in this._fileContents) {
-      if (Object.prototype.hasOwnProperty.call(this._fileContents, property)) {
-        const response = await apiClient.callApi(
-          this._outputfilename, this._fileContents[property])
-        translationContents[property] = response.translated_text
+  async generateContents(contents?: any) {
+    for (const [key, value] of Object.entries(contents)) {
+      if (typeof value !== 'object') {
+        const response = await this._apiClient.callApi(
+          this._outputfilename, contents[key])
+        contents[key] = response.translated_text
+      } else {
+        this.generateContents(value)
       }
     }
-    return translationContents
+  }
+
+  async parseFileContents() {
+    await this.generateContents(this.fileContents)
   }
 }
