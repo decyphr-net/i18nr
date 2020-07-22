@@ -6,11 +6,21 @@
   A command line tool for simplifying the process of translating your application
 </p>
 
+<p align="center">
+  <a href="https://oclif.io" target="_blank">
+    <img src="https://img.shields.io/badge/cli-oclif-brightgreen.svg" />
+  </a>
+  <a href="https://npmjs.org/package/decyphr" target="_blank">
+    <img src="https://img.shields.io/npm/v/decyphr.svg" />
+  </a>
+  <a href="https://npmjs.org/package/decyphr" target="_blank">
+    <img src="https://img.shields.io/npm/dw/decyphr.svg" />
+  </a>
+  <a href="https://github.com/decyphr-net/cli/blob/master/package.json" target="_blank">
+    <img src="https://img.shields.io/npm/l/decyphr.svg" />
+  </a>
+</p>
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/decyphr.svg)](https://npmjs.org/package/decyphr)
-[![Downloads/week](https://img.shields.io/npm/dw/decyphr.svg)](https://npmjs.org/package/decyphr)
-[![License](https://img.shields.io/npm/l/decyphr.svg)](https://github.com/decyphr-net/cli/blob/master/package.json)
 
 - [What is decyphr-i18nr?](#what-is-decyphr-i18nr)
   - [What it is](#what-it-is)
