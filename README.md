@@ -89,7 +89,7 @@ In addition to the `decyphr help` command, `decyphr` currently comes with two co
 This takes one required argument of **filename** and one required flag of **-t** or **--target_lang** with one optional parameter of **-o** or **--output_dir** to specify the location of the new translation file.
 - `filename` - the name of the file to translate (can include a path)
 - `-t`/`--target_lang` - a 2-digit language identifier used to inform what the target language is
-- `-o`/`--output_dir` - the path to where you want the file to be output. A filename will be generate, so don't include one. If left blank, the file will be placed the directory that the command is executed in
+- `-o`/`--output_dir` - the path to where you want the file to be output. A filename will be generate, so don't include one. If left blank, the file will be placed the same location as the input directory 
 
 ```
 USAGE

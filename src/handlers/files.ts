@@ -1,14 +1,14 @@
 import {readFileSync, writeFileSync, existsSync, mkdirSync} from 'fs'
-import APIInterface from './api'
+import Translator from './translator'
 
 export default class FileHandler {
-  
+  private _inputpath: string
   private _outputpath: string
   private _outputfilename: string
   private _type: string
   private _filename: string
-  private _apiClient = new APIInterface()
-  public fileContents: any
+  private _translator: Translator
+  public parsedContents: any
 
   /**
    * Constructs the `FileHandler` object using the parameters provided by the
@@ -26,9 +26,11 @@ export default class FileHandler {
    */
   constructor(filename: string, outputfilename: string, outputpath?: string) {
     this._filename = filename
+    this._inputpath = filename.substr(0, filename.lastIndexOf('/')) + '/'
     this._outputfilename = outputfilename
-    this._outputpath = outputpath || './'
-    this._type = '.json'
+    this._outputpath = outputpath || this._inputpath
+    this._type = this._filename.substring(this._filename.lastIndexOf('.'))
+    this._translator = new Translator(this._outputfilename)
 
     this._outputLocationExists()
     
@@ -77,7 +79,8 @@ export default class FileHandler {
   async readFile() {
     let file = readFileSync(this._filename, 'utf-8')
     console.info(`contents of ${this._filename} read successfully...`)
-    this.fileContents = JSON.parse(file)
+    this.parsedContents = JSON.parse(file)
+    return this.parsedContents
   }
 
   /**
@@ -91,19 +94,22 @@ export default class FileHandler {
     writeFileSync(outputTo, JSON.stringify(contents, null, 2));
   }
 
-  async generateContents(contents?: any) {
+  /**
+   * Traverse over the items in the object and if the key doesn't have any
+   * children, then translate the text, otherwise pass the child object to
+   * this method
+   * 
+   * TODO: Move this function a separate parser handler
+   * 
+   * @param {object} contents - The nested object structure to be traversed
+   */
+  async parseContents(contents: any) {
     for (const [key, value] of Object.entries(contents)) {
       if (typeof value !== 'object') {
-        const response = await this._apiClient.callApi(
-          this._outputfilename, contents[key])
-        contents[key] = response.translated_text
+        contents[key] = await this._translator.translateText(contents[key])
       } else {
-        this.generateContents(value)
+        this.parseContents(value)
       }
     }
-  }
-
-  async parseFileContents() {
-    await this.generateContents(this.fileContents)
   }
 }

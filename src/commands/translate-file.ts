@@ -41,10 +41,10 @@ export default class TranslateFile extends Command {
   async run() {
     const {args, flags} = this.parse(TranslateFile)
     const fileHandler = new FileHandler(args.file, flags.target_lang!, flags.output_dir || '')
-    await fileHandler.readFile()
-    const response = await fileHandler.parseFileContents()
+    let content = await fileHandler.readFile()
+    const response = await fileHandler.parseContents(content)
     setTimeout(() => {
-      fileHandler.outputFile(fileHandler.fileContents)
+      fileHandler.outputFile(fileHandler.parsedContents)
       this.log('task complete')
     }, 10000)
   }
