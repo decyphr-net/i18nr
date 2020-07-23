@@ -107,7 +107,6 @@ export default class FileHandler {
     for (const [key, value] of Object.entries(contents)) {
       if (typeof value !== 'object') {
         contents[key] = await this._translator.translateText(contents[key])
-        console.log(contents[key])
       } else {
         this.parseContents(value)
       }
