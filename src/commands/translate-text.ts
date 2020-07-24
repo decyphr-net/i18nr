@@ -6,11 +6,6 @@
 import {Command, flags} from '@oclif/command'
 import APIInterface from '../handlers/api'
 
-interface ApiData {
-  target_language_code: string;
-  text: string;
-}
-
 export default class TranslateText extends Command {
   static description = 'Translates string of text'
 

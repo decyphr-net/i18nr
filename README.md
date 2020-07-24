@@ -28,6 +28,7 @@
 - [Getting Started](#getting-started)
   - [Commands](#commands)
     - [`translate-file`](#translate-file)
+    - [`translate-yaml`](#translate-yaml)
     - [`translate-text`](#translate-text)
 
 # What is decyphr-i18nr?
@@ -69,7 +70,7 @@ npm i --save-dev decyphr
 And add it to your npm scripts:
 
 ```json
-"translate:pt": "./node_modules/.bin/decyphr translate-file i18n/translations/en.json -t pt -o i18n/translations/"
+"translate:pt": "./node_modules/.bin/decyphr translate-file i18n/translations/en.json -t pt"
 ```
 
 This way you can just run translate your projects with an npm command:
@@ -79,9 +80,10 @@ npm run translate:pt
 ```
 
 ## Commands
-In addition to the `decyphr help` command, `decyphr` currently comes with two commands.
+In addition to the `decyphr help` command, `decyphr` currently comes with three commands.
 - `translate-text`
 - `translate-file`
+- `translate-yaml`
 
 ### `translate-file`
 `translate-file` will translate a JSON file that you specify and generate the translated file with the language specified.
@@ -107,22 +109,63 @@ EXAMPLES
   $ decyphr translate-file en.json --target_lang pt --output_dir translations/
 ```
 
-Translate a file from English to Portuguese in the current directory -
+Translate the en.json file that's in the `translations` folder and output the Portuguese translations to the same folder -
 ```bash
-decyphr translate-file en.json -t pt
-# outputs - a new file named `pt.json` in the current directory
+decyphr translate-file translations/en.json -t pt
+# outputs - a new file called `pt.json` in the `translations` directory
 ```
 
-Or translate the en.json file that's in the `translations` folder and output the Portuguese translations to the same folder -
+Or translate the en.json file that's in the `translations` folder and output the Portuguese translations to current directory -
 ```bash
-decyphr translate-file translations/en.json -t pt -o translations/
-# outputs - a new file called `pt.json` in the `translations` directory
+decyphr translate-file translations/en.json -t pt -o ./
+# outputs - a new file called `pt.json` in the current directory
 ```
 
 The input langauge will be determined based on the content being translated, rather than the name of the file or any other flag.
 
-To see examples of what the output looks like then checkout the `examples` folder. In all cases the source language used was English, and any none `en.json` files were automatically generated using this command.
+To see examples of what the output looks like then checkout the `examples` folder. In all cases the source language used was English, and any non-`en.json` files were automatically generated using this command.
 
+### `translate-yaml`
+`translate-yaml` will translate a YAML file that you specify and generate the translated file with the language specified.
+
+This takes one required argument of **filename** and one required flag of **-t** or **--target_lang** with one optional parameter of **-o** or **--output_dir** to specify the location of the new translation file.
+- `filename` - the name of the file to translate (can include a path)
+- `-t`/`--target_lang` - a 2-digit language identifier used to inform what the target language is
+- `-o`/`--output_dir` - the path to where you want the file to be output. A filename will be generate, so don't include one. If left blank, the file will be placed the same location as the input directory
+
+```bash
+Translates a YAML file and generates a new file containing the translations
+
+USAGE
+  $ decyphr translate-yaml [FILE]
+
+OPTIONS
+  -h, --help                     show CLI help
+  -o, --output_dir=output_dir    The dir that you want the new file to be placed in
+  -t, --target_lang=target_lang  Two-character code for the target language
+
+EXAMPLES
+  $ decyphr translate-yaml en.yaml -t pt
+  $ decyphr translate-yaml en.yaml --target_lang pt
+  $ decyphr translate-yaml en.yaml -t pt -o translations/
+  $ decyphr translate-yaml en.yaml --target_lang pt --output_dir translations/
+```
+
+Translate the en.yaml file that's in the `translations` folder and output the Portuguese translations to the same folder -
+```bash
+decyphr translate-yaml translations/en.yaml -t pt
+# outputs - a new file called `pt.yaml` in the `translations` directory
+```
+
+Or translate the en.yaml file that's in the `translations` folder and output the Portuguese translations to current directory -
+```bash
+decyphr translate-file translations/en.yaml -t pt -o ./
+# outputs - a new file called `pt.yaml` in the current directory
+```
+
+The input langauge will be determined based on the content being translated, rather than the name of the file or any other flag.
+
+To see examples of what the output looks like then checkout the `examples` folder. In all cases the source language used was English, and any non-`en.yaml` files were automatically generated using this command.
 
 ### `translate-text`
 `translate-text` is a simple command that will translate a given piece of text and translate it to the target language.

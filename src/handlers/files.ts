@@ -91,7 +91,7 @@ export default class FileHandler {
   async outputFile(contents: any) {
     let outputTo = await this._constructOutputPath()
     console.info(`writing file contents to ${outputTo}`)
-    writeFileSync(outputTo, JSON.stringify(contents, null, 2));
+    writeFileSync(outputTo, contents);
   }
 
   /**
