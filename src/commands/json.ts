@@ -4,7 +4,7 @@
  * translate as the first parameter and the the target language as a flag
  */
 import {Command, flags} from '@oclif/command'
-import FileHandler from '../handlers/files'
+import TranslationCommandHandler from '../handlers/command'
 
 export default class TranslateJson extends Command {
   static description = 'Translates a JSON file and generates a new file containing the translations'
@@ -37,12 +37,10 @@ export default class TranslateJson extends Command {
 
   async run() {
     const {args, flags} = this.parse(TranslateJson)
-    const fileHandler = new FileHandler(args.file, flags.target_lang!, flags.output_dir || '')
-    let content = await fileHandler.readFile()
-    await fileHandler.parseContents(content)
-    setTimeout(() => {
-      fileHandler.outputFile(JSON.stringify(fileHandler.parsedContents, null, 2))
-      this.log('task complete')
-    }, 10000)
+
+    const fileTranslation = new TranslationCommandHandler(
+      flags.target_lang!, args.file, 'json', flags.output_dir)
+    
+    await fileTranslation.processCommand()
   }
 }
