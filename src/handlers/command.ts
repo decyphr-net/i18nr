@@ -25,7 +25,7 @@ export default class TranslationCommandHandler {
     if (fs.existsSync('decyphr.config.json')) {
       this._userConfig = JSON.parse(fs.readFileSync('decyphr.config.json', 'utf-8'))
       this.inputPath = `${this._userConfig['translationDir']}${inputFilename}`
-      this._outputPath = this._userConfig['translationDir']
+      this._outputPath = this._userConfig['translationDir'] + this._outputPath
     } else {
       console.warn('config not found')
       this.inputPath = inputFilename
