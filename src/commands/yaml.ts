@@ -7,10 +7,10 @@ export default class TranslateYaml extends Command {
   static description = 'Translates a YAML file and generates a new file containing the translations'
 
   static examples = [
-    '$ decyphr translate-yaml en.yaml -t pt',
-    '$ decyphr translate-yaml en.yaml --target_lang pt',
-    '$ decyphr translate-yaml en.yaml -t pt -o translations/',
-    '$ decyphr translate-yaml en.yaml --target_lang pt --output_dir translations/',
+    '$ decyphr yaml en.yaml -t pt',
+    '$ decyphr yaml en.yaml --target_lang pt',
+    '$ decyphr yaml en.yaml -t pt -o translations/',
+    '$ decyphr yaml en.yaml --target_lang pt --output_dir translations/',
   ]
 
   static flags = {
@@ -39,7 +39,6 @@ export default class TranslateYaml extends Command {
     fileHandler.parsedContents = content
     await fileHandler.parseContents(content)
     setTimeout(() => {
-      console.log(fileHandler.parsedContents)
       fileHandler.outputFile(PrettyYaml.stringify(fileHandler.parsedContents, 2))
       this.log('task complete')
     }, 10000)
