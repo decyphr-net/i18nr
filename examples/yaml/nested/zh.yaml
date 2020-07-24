@@ -1,0 +1,33 @@
+LandingPage:
+  loginbutton: "登录"
+  registerbutton: "寄存器"
+  heroparagraph: "通过学习更快地学习新语言"
+  whatisitheader: "它是什么？"
+  whatisitparagraph: "Decyphr是帮助学习新语言的新应用程序。"
+  whatisitparagraph2: "学习用新语言阅读可能是一个漫长的艰难过程。如果不知道单词的含义，试图翻阅一本书可能会令人沮丧。"
+  whatisitparagraph3: "Decyphr旨在通过允许您将书中的短语翻译成您的母语来简化此过程，同时仍然提供所学语言的句子结构明细和句子的音频片段。"
+  whatdoesitoffer:
+    header: "解密提供什么？"
+    paragraph: "Decyphr提供了许多功能来帮助您学习新语言，其中包括但不限于："
+    listitem1: "定时和结构化的阅读会议"
+    listitem2: "分解句子，以便查看哪些词是动词，形容词或名词"
+    listitem3: "已翻译文本的音频片段，因此您不仅可以看到已翻译的表单，还可以听到它的原始语言"
+    listitem4: "练习课，使您可以练习和加强在阅读课中学到的翻译"
+    listitem5: "提供指标，使用户可以查看其随着时间推移的效果"
+Accounts:
+  RegisterForm:
+    username: "用户名"
+    email: "电子邮件"
+    password: "密码"
+    nativelanguage: "母语"
+    languagebeinglearned: "学习语言"
+    english: "英语"
+    portuguese: "葡萄牙语"
+  SignInForm:
+    forgotpassword: "忘记密码？"
+    signup: "还没有帐号？注册"
+    buttonone: "登入"
+    header: "登入"
+    heading: "注册"
+    buttontwo: "注册"
+    signin: "已经有帐号了？登入"
