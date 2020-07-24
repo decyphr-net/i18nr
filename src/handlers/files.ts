@@ -1,4 +1,6 @@
 import {readFileSync, writeFileSync, existsSync, mkdirSync} from 'fs'
+import * as YAML from 'yamljs'
+import * as PrettyYaml from 'json-to-pretty-yaml'
 import Translator from './translator'
 
 export default class FileHandler {
@@ -24,12 +26,12 @@ export default class FileHandler {
    * @param outputfilename - The name that will be given to the new file
    * @param outputpath - The directory where the new file will be created 
    */
-  constructor(filename: string, outputfilename: string, outputpath?: string) {
+  constructor(filename: string, type: string, outputfilename: string, outputpath?: string) {
     this._filename = filename
     this._inputpath = filename.substr(0, filename.lastIndexOf('/')) + '/'
     this._outputfilename = outputfilename
     this._outputpath = outputpath || this._inputpath
-    this._type = this._filename.substring(this._filename.lastIndexOf('.'))
+    this._type = type
     this._translator = new Translator(this._outputfilename)
 
     this._outputLocationExists()
@@ -69,7 +71,7 @@ export default class FileHandler {
    * @returns The ouput location including the filename and extenstion
    */
   private _constructOutputPath(): string {
-    return this._outputpath + this._outputfilename + this._type
+    return this._outputpath + this._outputfilename + '.' + this._type
   }
 
   /**
@@ -77,9 +79,14 @@ export default class FileHandler {
    * the contents as JSON
    */
   async readFile() {
-    let file = readFileSync(this._filename, 'utf-8')
+    if (this._type === 'json') {
+      let file = readFileSync(this._filename, 'utf-8')
+      this.parsedContents = JSON.parse(file)
+    } else if (this._type === 'yaml') {
+      this.parsedContents = YAML.load(this._filename)
+    }
+    
     console.info(`contents of ${this._filename} read successfully...`)
-    this.parsedContents = JSON.parse(file)
     return this.parsedContents
   }
 
@@ -88,10 +95,16 @@ export default class FileHandler {
    * 
    * @param contents The translated text in JSON format
    */
-  async outputFile(contents: any) {
+  async outputFile() {
     let outputTo = await this._constructOutputPath()
     console.info(`writing file contents to ${outputTo}`)
-    writeFileSync(outputTo, contents);
+    if (this._type === 'json') {
+      writeFileSync(outputTo, JSON.stringify(
+        this.parsedContents, null, 2))
+    }else if (this._type === 'yaml') {
+      writeFileSync(outputTo, PrettyYaml.stringify(
+        this.parsedContents, 2))
+    }
   }
 
   /**

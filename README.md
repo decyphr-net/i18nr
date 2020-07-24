@@ -79,6 +79,32 @@ This way you can just run translate your projects with an npm command:
 npm run translate:pt
 ```
 
+Instead of typing out the entire path to the translations directory, you can also create a `decyphr.config.json` file and add the `translationDir` setting.
+```json
+{
+  "translationDir": "i18n/translations/"
+}
+```
+
+Place this config in the directory that you run the `decyphr` command from and you'll only need to specify the name of the file:
+```bash
+decyphr json en.json -t pt
+```
+
+Will retrieve the file from `i18n/translations/en.json` and output to `i18n/translations/pt.json`.
+
+Similarly:
+```bash
+decyphr json loginpage/en.json -t pt -o loginpage/
+```
+
+Will retrieve the file from `i18n/translations/loginpage/en.json` and output to `i18n/translations/loginpage/pt.json`
+
+This can also be used in the above NPM example:
+```json
+"translate:pt": "./node_module/.bin/decyphr json en.json -t pt
+```
+
 ## Commands
 In addition to the `decyphr help` command, `decyphr` currently comes with three commands.
 - `text`
@@ -91,7 +117,7 @@ In addition to the `decyphr help` command, `decyphr` currently comes with three 
 This takes one required argument of **filename** and one required flag of **-t** or **--target_lang** with one optional parameter of **-o** or **--output_dir** to specify the location of the new translation file.
 - `filename` - the name of the file to translate (can include a path)
 - `-t`/`--target_lang` - a 2-digit language identifier used to inform what the target language is
-- `-o`/`--output_dir` - the path to where you want the file to be output. A filename will be generate, so don't include one. If left blank, the file will be placed the same location as the input directory 
+- `-o`/`--output_dir` - the path to where you want the file to be output. A filename will be generate, so don't include one. If left blank, the file will be placed the same location as the input directory.
 
 ```
 USAGE

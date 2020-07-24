@@ -1,7 +1,6 @@
 import {Command, flags} from '@oclif/command'
-import * as YAML from 'yamljs'
-import * as PrettyYaml from 'json-to-pretty-yaml'
-import FileHandler from '../handlers/files'
+
+import TranslationCommandHandler from '../handlers/command'
 
 export default class TranslateYaml extends Command {
   static description = 'Translates a YAML file and generates a new file containing the translations'
@@ -34,13 +33,10 @@ export default class TranslateYaml extends Command {
 
   async run() {
     const {args, flags} = this.parse(TranslateYaml)
-    const fileHandler = new FileHandler(args.file, flags.target_lang!, flags.output_dir || '')
-    let content = await YAML.load(args.file)
-    fileHandler.parsedContents = content
-    await fileHandler.parseContents(content)
-    setTimeout(() => {
-      fileHandler.outputFile(PrettyYaml.stringify(fileHandler.parsedContents, 2))
-      this.log('task complete')
-    }, 10000)
+
+    const fileTranslation = new TranslationCommandHandler(
+      flags.target_lang!, args.file, 'yaml', flags.output_dir)
+    
+    await fileTranslation.processCommand()
   }
 }
