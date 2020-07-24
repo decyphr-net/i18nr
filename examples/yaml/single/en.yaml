@@ -1,0 +1,105 @@
+---
+Landingpage.loginbutton: Login
+Landingpage.registerbutton: Register
+Landingpage.heroparagraph: Learn to read a new language faster with
+Landingpage.whatisitheader: What Is It?
+Landingpage.whatisitparagraph: Decyphr is a new application for aiding in the learning
+  of new languages.
+Landingpage.whatisitparagraph2: Learning to read in a new language can be a long a
+  difficult process. It can be frustrating trying to get through a book if don't know
+  the meanings of the words.
+Landingpage.whatisitparagraph3: Decyphr aims to simplify this process by allowing
+  you to translate phrases from your books into your native language, while also still
+  providing a breakdown of the sentence structure and an audio clip of the sentence
+  in the language that you are learning.
+Landingpagewhatdoesitoffer.header: What Does Decypher Offer?
+Landingpagewhatdoesitoffer.paragraph: 'Decyphr comes with plenty of functionality
+  ready to help to learn your new language which includes, but is not limited to:'
+Landingpagewhatdoesitoffer.listitem1: Timed and structured reading sessions
+Landingpagewhatdoesitoffer.listitem2: Breaks down sentence so you can see which words
+  are verbs, or adjectives or nouns
+Landingpagewhatdoesitoffer.listitem3: Audio clips of translated text so instead of
+  just seeing the translated form, you can also hear it the original language
+Landingpagewhatdoesitoffer.listitem4: Practice sessions that will allow you to practice
+  and reinforce the translations that you learned in your reading sessions
+Landingpagewhatdoesitoffer.listitem5: Provides metrics to enable users to see their
+  performance over time
+Accountsforms.username: Username
+Accountsforms.email: Email
+Accountsforms.password: Password
+Accountsforms.nativelanguage: Native Language
+Accountsforms.languagebeinglearned: Language Being Learned
+Accountsforms.english: English
+Accountsforms.portuguese: Portuguese
+Signin.forgotpassword: Forgot password?
+Signin.signup: Don't have an account? Sign Up
+Signin.button: Sign in
+Signin.header: Sign in
+Signup.heading: Sign Up
+Signup.button: Sign Up
+Signup.signin: Already have an account? Sign in
+Navigationdrawer.dashboard: Dashboard
+Navigationdrawer.myreadinglist: My Reading List
+Navigationdrawer.practice: Practice
+Navigationdrawer.profile: My Profile
+Navigationdrawer.logout: Logout
+Dashboard.header: Welcome To Your Decyphr Dashboard!
+Dashboard.librarycardheader: Your Library
+Dashboard.librarycardtoptext: You currently have
+Dashboard.librarycardbottomtext: books in your library
+Dashboard.librarycardbuttontext: Reading List
+Dashboard.practicecardheader: Your Practice Sessions
+Dashboard.practicecardtoptext: You have practiced
+Dashboard.practicecardbottomtext: times to date
+Dashboard.practicecardbuttontext: Practice Now
+Dashboard.readingcardheader: Your Reading Sessions
+Dashboard.readingcardtoptext: You have read
+Dashboard.readingcardbottomtext: times to date
+Dashboard.readingcardbuttontext: Read Now
+Booksearch.placeholder: Find your book
+Booksearch.addtolist: Add
+Booklist.listheader: Your Reading List
+Booklist.nobooksnessagep1: You haven't added any books yet. To get started, start
+  searching for the book that you're ready in the search bar above.
+Booklist.nobooksnessagep2: 'Hint: To help you find which exact edition you are reading,
+  the search bar will automatically search in the language that you have chosen to
+  learn.'
+Booklist.startsession: Start Reading
+Booklist.sessioncount: 'Number of Reading Sessions: {value}'
+Readingsessionmodal.header: Reading Session
+Readingsessionform.duration: Duration (in minutes)
+Readingsessionform.startsession: Start Reading
+Readingsessiontimer.countdownfirstcase: 'Time remaining: {minutes}:0{seconds}'
+Readingsessiontimer.countdownsecondcase: 'Time remaining: {minutes}:{seconds}'
+Readingsessionbutton.startsession: Start Reading
+Readingsessionbutton.endsession: End Session
+Readingsessionmodal.sessionendedheader: Your session has ended
+Readingsessionmodal.endsessionform: How many pages did you read?
+Readingsessionmodal.endsessionformbutton: Save and leave session
+Translationpage.tableheading: Your Translations
+Translationpage.inputplaceholder: Translate Text
+Translationpage.translatebutton: Translate
+Translationpage.translationmenu.viewdetails: View Translation Details
+Translationpage.translationmenu.delete: Delete
+Translationpage.viewtranslationmodalheader: Translation Breakdown
+Translationpage.viewtranslationmodaloriginal: 'Original Text: '
+Translationpage.viewtranslationmodaltranslated: 'Translated Text: '
+Translationpage.viewtranslationmodalaudio: 'Audio Clip: '
+Translationpage.deletetranslationmodalheader: Delete Translation
+Translationpage.deletetranslationconfirmation: You are about to delete this translation.
+  Are you sure?
+Translationpage.deletetranslationyes: 'Yes'
+Translationpage.deletetranslationno: 'No'
+Translationpage.emptylist: Start translating phrases and sentences from your book
+  above.
+Translationpage.emptylisthint: 'Hint: Once an item has been translated, you can click
+  on the menu icon on the right-hand side of the table get a breakdown of the translation,
+  including an audio clip.'
+Practicesession.header: Reinforce Your Learning
+Practicesession.paragraph: Take a couple of minutes to practice some of the translations
+  that you've created in your reading sessions.
+Practicesession.startbutton: Begin Practice Session
+Practicesession.endsessiontext: You have completed this session. You scored {score}%
+Practicesession.questionfeedbackcorrect: Correct!
+Practicesession.questionfeedbackincorrect: 'Sorry, the correct answer is: {correctAnswer}'
+Practicesession.guessbutton: Submit Answer

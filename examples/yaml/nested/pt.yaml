@@ -1,0 +1,33 @@
+LandingPage:
+  loginbutton: "Conecte-se"
+  registerbutton: "Registro"
+  heroparagraph: "Aprenda a ler um novo idioma mais rapidamente com"
+  whatisitheader: "O que é isso?"
+  whatisitparagraph: "Decyphr é uma nova aplicação para auxiliar na aprendizagem de novas línguas."
+  whatisitparagraph2: "Aprender a ler em um novo idioma pode ser um processo longo e difícil. Pode ser frustrante tentar ler um livro se não souber o significado das palavras."
+  whatisitparagraph3: "O Decyphr visa simplificar esse processo, permitindo que você traduza frases de seus livros para o seu idioma nativo, além de fornecer um detalhamento da estrutura da frase e um clipe de áudio da frase no idioma que você está aprendendo."
+  whatdoesitoffer:
+    header: "O que o Decypher oferece?"
+    paragraph: "O Decyphr vem com muitas funcionalidades prontas para ajudar a aprender seu novo idioma, que inclui, mas não se limita a:"
+    listitem1: "Sessões de leitura programadas e estruturadas"
+    listitem2: "Divide a frase para que você possa ver quais palavras são verbos, adjetivos ou substantivos"
+    listitem3: "Clipes de áudio do texto traduzido, portanto, em vez de apenas ver o formulário traduzido, você também pode ouvi-lo no idioma original"
+    listitem4: "Sessões práticas que permitirão praticar e reforçar as traduções que você aprendeu nas suas sessões de leitura"
+    listitem5: "Fornece métricas para permitir que os usuários vejam seu desempenho ao longo do tempo"
+Accounts:
+  RegisterForm:
+    username: "Nome do usuário"
+    email: "O email"
+    password: "Senha"
+    nativelanguage: "Língua nativa"
+    languagebeinglearned: "Idioma Aprendido"
+    english: "Inglês"
+    portuguese: "Português"
+  SignInForm:
+    forgotpassword: "Esqueceu a senha?"
+    signup: "Não possui uma conta? Inscrever-se"
+    buttonone: "assinar em"
+    header: "assinar em"
+    heading: "Inscrever-se"
+    buttontwo: "Inscrever-se"
+    signin: "já tem uma conta? assinar em"
