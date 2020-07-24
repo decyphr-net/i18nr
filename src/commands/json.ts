@@ -6,14 +6,14 @@
 import {Command, flags} from '@oclif/command'
 import FileHandler from '../handlers/files'
 
-export default class TranslateFile extends Command {
+export default class TranslateJson extends Command {
   static description = 'Translates a JSON file and generates a new file containing the translations'
 
   static examples = [
-    '$ decyphr translate-file en.json -t pt',
-    '$ decyphr translate-file en.json --target_lang pt',
-    '$ decyphr translate-file en.json -t pt -o translations/',
-    '$ decyphr translate-file en.json --target_lang pt --output_dir translations/',
+    '$ decyphr json en.json -t pt',
+    '$ decyphr json en.json --target_lang pt',
+    '$ decyphr json en.json -t pt -o translations/',
+    '$ decyphr json en.json --target_lang pt --output_dir translations/',
   ]
 
   static flags = {
@@ -36,7 +36,7 @@ export default class TranslateFile extends Command {
   static args = [{name: 'file'}]
 
   async run() {
-    const {args, flags} = this.parse(TranslateFile)
+    const {args, flags} = this.parse(TranslateJson)
     const fileHandler = new FileHandler(args.file, flags.target_lang!, flags.output_dir || '')
     let content = await fileHandler.readFile()
     await fileHandler.parseContents(content)

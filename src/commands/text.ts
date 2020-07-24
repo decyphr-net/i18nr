@@ -10,15 +10,20 @@ export default class TranslateText extends Command {
   static description = 'Translates string of text'
 
   static examples = [
-    '$ decyphr translate-text hello -t pt',
-    '$ decyphr translate-text hello --target_lang pt',
-    '$ decyphr translate-text "tudo bem?" --target_lang en',
+    '$ decyphr text hello -t pt',
+    '$ decyphr text hello --target_lang pt',
+    '$ decyphr text "tudo bem?" --target_lang en',
   ]
 
   static flags = {
     help: flags.help({char: 'h'}),
     // flag to determine the target language
-    target_lang: flags.string({char: 't', description: 'Two-character code for the target language'}),
+    target_lang: flags.string(
+      {
+        char: 't',
+        description: 'Two-character code for the target language'
+      }
+    ),
   }
 
   static args = [{name: 'text'}]
