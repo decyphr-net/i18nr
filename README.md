@@ -27,9 +27,9 @@
   - [What it isn't](#what-it-isnt)
 - [Getting Started](#getting-started)
   - [Commands](#commands)
-    - [`translate-file`](#translate-file)
-    - [`translate-yaml`](#translate-yaml)
-    - [`translate-text`](#translate-text)
+    - [`json`](#json)
+    - [`yaml`](#yaml)
+    - [`text`](#text)
 
 # What is decyphr-i18nr?
 
@@ -70,7 +70,7 @@ npm i --save-dev decyphr
 And add it to your npm scripts:
 
 ```json
-"translate:pt": "./node_modules/.bin/decyphr translate-file i18n/translations/en.json -t pt"
+"translate:pt": "./node_modules/.bin/decyphr json i18n/translations/en.json -t pt"
 ```
 
 This way you can just run translate your projects with an npm command:
@@ -81,12 +81,12 @@ npm run translate:pt
 
 ## Commands
 In addition to the `decyphr help` command, `decyphr` currently comes with three commands.
-- `translate-text`
-- `translate-file`
-- `translate-yaml`
+- `text`
+- `json`
+- `yaml`
 
-### `translate-file`
-`translate-file` will translate a JSON file that you specify and generate the translated file with the language specified.
+### `json`
+`json` will translate a JSON file that you specify and generate the translated file with the language specified.
 
 This takes one required argument of **filename** and one required flag of **-t** or **--target_lang** with one optional parameter of **-o** or **--output_dir** to specify the location of the new translation file.
 - `filename` - the name of the file to translate (can include a path)
@@ -95,7 +95,7 @@ This takes one required argument of **filename** and one required flag of **-t**
 
 ```
 USAGE
-  $ decyphr translate-file [FILE]
+  $ decyphr json [FILE]
 
 OPTIONS
   -h, --help                     show CLI help
@@ -103,21 +103,21 @@ OPTIONS
   -t, --target_lang=target_lang  Two-character code for the target language
 
 EXAMPLES
-  $ decyphr translate-file en.json -t pt
-  $ decyphr translate-file en.json --target_lang pt
-  $ decyphr translate-file en.json -t pt -o translations/
-  $ decyphr translate-file en.json --target_lang pt --output_dir translations/
+  $ decyphr json en.json -t pt
+  $ decyphr json en.json --target_lang pt
+  $ decyphr json en.json -t pt -o translations/
+  $ decyphr json en.json --target_lang pt --output_dir translations/
 ```
 
 Translate the en.json file that's in the `translations` folder and output the Portuguese translations to the same folder -
 ```bash
-decyphr translate-file translations/en.json -t pt
+decyphr json translations/en.json -t pt
 # outputs - a new file called `pt.json` in the `translations` directory
 ```
 
 Or translate the en.json file that's in the `translations` folder and output the Portuguese translations to current directory -
 ```bash
-decyphr translate-file translations/en.json -t pt -o ./
+decyphr json translations/en.json -t pt -o ./
 # outputs - a new file called `pt.json` in the current directory
 ```
 
@@ -125,8 +125,8 @@ The input langauge will be determined based on the content being translated, rat
 
 To see examples of what the output looks like then checkout the `examples` folder. In all cases the source language used was English, and any non-`en.json` files were automatically generated using this command.
 
-### `translate-yaml`
-`translate-yaml` will translate a YAML file that you specify and generate the translated file with the language specified.
+### `yaml`
+`yaml` will translate a YAML file that you specify and generate the translated file with the language specified.
 
 This takes one required argument of **filename** and one required flag of **-t** or **--target_lang** with one optional parameter of **-o** or **--output_dir** to specify the location of the new translation file.
 - `filename` - the name of the file to translate (can include a path)
@@ -137,7 +137,7 @@ This takes one required argument of **filename** and one required flag of **-t**
 Translates a YAML file and generates a new file containing the translations
 
 USAGE
-  $ decyphr translate-yaml [FILE]
+  $ decyphr yaml [FILE]
 
 OPTIONS
   -h, --help                     show CLI help
@@ -145,21 +145,21 @@ OPTIONS
   -t, --target_lang=target_lang  Two-character code for the target language
 
 EXAMPLES
-  $ decyphr translate-yaml en.yaml -t pt
-  $ decyphr translate-yaml en.yaml --target_lang pt
-  $ decyphr translate-yaml en.yaml -t pt -o translations/
-  $ decyphr translate-yaml en.yaml --target_lang pt --output_dir translations/
+  $ decyphr yaml en.yaml -t pt
+  $ decyphr yaml en.yaml --target_lang pt
+  $ decyphr yaml en.yaml -t pt -o translations/
+  $ decyphr yaml en.yaml --target_lang pt --output_dir translations/
 ```
 
 Translate the en.yaml file that's in the `translations` folder and output the Portuguese translations to the same folder -
 ```bash
-decyphr translate-yaml translations/en.yaml -t pt
+decyphr yaml translations/en.yaml -t pt
 # outputs - a new file called `pt.yaml` in the `translations` directory
 ```
 
 Or translate the en.yaml file that's in the `translations` folder and output the Portuguese translations to current directory -
 ```bash
-decyphr translate-file translations/en.yaml -t pt -o ./
+decyphr yaml translations/en.yaml -t pt -o ./
 # outputs - a new file called `pt.yaml` in the current directory
 ```
 
@@ -167,8 +167,8 @@ The input langauge will be determined based on the content being translated, rat
 
 To see examples of what the output looks like then checkout the `examples` folder. In all cases the source language used was English, and any non-`en.yaml` files were automatically generated using this command.
 
-### `translate-text`
-`translate-text` is a simple command that will translate a given piece of text and translate it to the target language.
+### `text`
+`text` is a simple command that will translate a given piece of text and translate it to the target language.
 
 This takes one required argument of **text** and one required flag of **-t** or **--target_lang**.
 - `text` - a string of text that you want to translate
@@ -176,32 +176,32 @@ This takes one required argument of **text** and one required flag of **-t** or 
 
 ```bash
 USAGE
-  $ decyphr translate-text [TEXT]
+  $ decyphr text [TEXT]
 
 OPTIONS
   -h, --help                     show CLI help
   -t, --target_lang=target_lang  Two-character code for the target language
 
 EXAMPLES
-  $ decyphr translate-text hello -t pt
-  $ decyphr translate-text hello --target_lang pt
-  $ decyphr translate-text "tudo bem?" --target_lang en
+  $ decyphr text hello -t pt
+  $ decyphr text hello --target_lang pt
+  $ decyphr text "tudo bem?" --target_lang en
 ```
 
 For example, to translate the word **hello** into Portuguese, thenuse -
 ```bash
-decyphr translate-text hello -t pt
+decyphr text hello -t pt
 # outputs - "hello" translates to "Olá"
 ```
 
 Longer strings of text can also be used -
 ```bash
-decyphr translate-text "hello, my name is Aaron" -t pt
+decyphr text "hello, my name is Aaron" -t pt
 # outputs - "hello, my name is Aaron" translates to "Olá, meu nome é Aaron"
 ```
 
 The input language is automatically determined, so you don't need to specify the input language, and you can use any language as input -
 ```bash
-decyphr translate-text "esta frase é portuguesa e será traduzida para o francês" -t fr
+decyphr text "esta frase é portuguesa e será traduzida para o francês" -t fr
 # outputs - "esta frase é portuguesa e será traduzida para o francês" translates to "cette phrase est portugaise et sera traduite en français"
 ```
