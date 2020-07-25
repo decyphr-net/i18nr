@@ -1,5 +1,5 @@
 import {Command, flags} from '@oclif/command'
-
+import * as fs from 'fs'
 import TranslationCommandHandler from '../handlers/command'
 
 export default class TranslateYaml extends Command {
@@ -31,12 +31,32 @@ export default class TranslateYaml extends Command {
 
   static args = [{name: 'file'}]
 
+  getOutputLangs() {
+    let langList = []
+    if (fs.existsSync('decyphr.config.json')) {
+      const config = JSON.parse(fs.readFileSync('decyphr.config.json', 'utf-8'))
+      if (config['languages']) {
+        langList = config['languages']
+      }
+    }
+    return langList
+  }
+
   async run() {
     const {args, flags} = this.parse(TranslateYaml)
+    let languages:any = []
 
-    const fileTranslation = new TranslationCommandHandler(
-      flags.target_lang!, args.file, 'yaml', flags.output_dir)
-    
-    await fileTranslation.processCommand()
+    if (this.getOutputLangs().length >= 1) {
+      languages = this.getOutputLangs()
+    } else {
+      languages.push(flags.target_lang)
+    }
+
+    for (let language of languages) {
+      const fileTranslation = new TranslationCommandHandler(
+        language, args.file, 'yaml', flags.output_dir)
+  
+      await fileTranslation.processCommand()
+    }
   }
 }
