@@ -1,7 +1,7 @@
 {
   "name": "decyphr",
   "description": "A command line tool for simplifying the process of translating your application",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "author": "Aaron Sinnott @aaronsnig501",
   "bin": {
     "decyphr": "./bin/run"
