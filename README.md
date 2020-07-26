@@ -60,7 +60,9 @@ For example, if you are using React, you may be using *react-intl* or *react-i18
 
 *decyphr-i18nr* is **not** 100% accurate. Translations are provided by Google Translate, and therefore *decyphr-i18nr* will only be as accurate as Google Translate. With that being said, it is pretty good, but do expect some things to be not quite right.
 
-*decyphr-i18nr* does **not** support much at the moment. So far we only only support simple JSON files, but are working on being as widely supported as possible.
+*decyphr-i18nr* does **not** support much at the moment. So far we support JSON files and YAML files of any depth, but are working on being as widely supported as possible.
+
+Take a look at the examples directory to see some of the structures that `decyphr-i18nr` can work with.
 
 ## Getting Started
 
