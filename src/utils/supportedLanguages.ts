@@ -1,6 +1,4 @@
-interface KeyValuePair {
-  [key: string]: string
-}
+import {KeyValuePair} from '../types'
 
 const SupportedLanguageList: KeyValuePair = {
   'af': 'Afrikaans',

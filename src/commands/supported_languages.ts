@@ -1,5 +1,5 @@
 import {Command} from '@oclif/command'
-import SupportedLanguageList from '../utils/supportedLanguages'
+import SupportedLanguagesHandler from '../handlers/supportedLanguages'
 
 export default class SupportedLanguages extends Command {
   static description = 'Outputs the list of supported languages'
@@ -9,8 +9,7 @@ export default class SupportedLanguages extends Command {
   ]
 
   async run() {
-    for (let lang in SupportedLanguageList) {
-      this.log(`${lang} => ${SupportedLanguageList[lang]}`)
-    }
+    const langHandler = new SupportedLanguagesHandler()
+    langHandler.displaySupportedLanguages()
   }
 }

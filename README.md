@@ -39,6 +39,7 @@
       - [`yaml`](#yaml)
       - [`text`](#text)
       - [`supported_languages`](#supported_languages)
+      - [`find_language`](#find_language)
 
 ## What is decyphr-i18nr?
 
@@ -157,6 +158,7 @@ In addition to the `decyphr help` command, `decyphr` currently comes with the fo
 - `json`
 - `yaml`
 - `supported_languages`
+- `find_language`
 
 #### `json`
 `json` will translate a JSON file that you specify and generate the translated file with the language specified.
@@ -292,4 +294,54 @@ USAGE
 
 EXAMPLE
   $ decyphr supported_languages
+```
+
+#### `find_language`
+
+This command will allow you to search for a language in our list of supported languages based on the language name or the code.
+
+This command has two available flags:
+- `-c`/`--code` - a 2-digit language identifier
+- `-n`/`--name` - the name of the language
+
+If both flags are provided, `-c` will override `-n`
+
+```bash
+Search for a language based on the code or name
+
+USAGE
+  $ decyphr find_language
+
+OPTIONS
+  -c, --code=code  Two-character code for the target language
+  -h, --help       show CLI help
+  -n, --name=name  The name of the langauge you want to check
+
+EXAMPLES
+  $ decyphr find_language -n Portuguese
+  $ decyphr find_language -c pt
+```
+
+If you search for a language name that can be found easily, it will output the language code and name:
+```bash
+decyphr find_language -n portuguese
+# outputs - pt => Portuguese
+```
+
+Same for the code:
+```bash
+decyphr find_language -c pt
+# outputs - pt => Portuguese
+```
+
+If an item can't be found it will return an error suggesting to lookup the entire list:
+```bash
+decyphr find_language -c pa
+# outputs - Error: Could not find pt. Try tunning 'supported_languages'
+```
+
+And if you code that contains more or less than two characters an error will be thrown:
+```bash
+decyphr find_language -c pt-br
+# outputs - Error: Language code: pt-br should only contain 2 characters
 ```
