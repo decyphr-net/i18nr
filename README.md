@@ -38,6 +38,7 @@
       - [`json`](#json)
       - [`yaml`](#yaml)
       - [`text`](#text)
+      - [`supported_languages`](#supported_languages)
 
 ## What is decyphr-i18nr?
 
@@ -151,10 +152,11 @@ npm run translate
 ```
 
 ### Commands
-In addition to the `decyphr help` command, `decyphr` currently comes with three commands.
+In addition to the `decyphr help` command, `decyphr` currently comes with the following commands.
 - `text`
 - `json`
 - `yaml`
+- `supported_languages`
 
 #### `json`
 `json` will translate a JSON file that you specify and generate the translated file with the language specified.
@@ -277,4 +279,17 @@ The input language is automatically determined, so you don't need to specify the
 ```bash
 decyphr text "esta frase é portuguesa e será traduzida para o francês" -t fr
 # outputs - "esta frase é portuguesa e será traduzida para o francês" translates to "cette phrase est portugaise et sera traduite en français"
+```
+
+#### `supported_languages`
+Returns a list of the supported language codes and the names of the languages.
+
+```bash
+Outputs the list of supported languages
+
+USAGE
+  $ decyphr supported_languages
+
+EXAMPLE
+  $ decyphr supported_languages
 ```
