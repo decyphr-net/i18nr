@@ -1,16 +1,15 @@
-import * as fs from 'fs'
+import * as fs from "fs";
 
-import FileHandler from './files'
+import FileHandler from "./files";
 
 export default class TranslationCommandHandler {
-
-  private _userConfig: any
-  private _fileHandler: FileHandler
-  private _inputFilename: string
-  private inputPath: string
-  private _outputPath: string
-  private _fileType: string
-  private _target_lang: string
+  private _userConfig: any;
+  private _fileHandler: FileHandler;
+  private _inputFilename: string;
+  private inputPath: string;
+  private _outputPath: string;
+  private _fileType: string;
+  private _target_lang: string;
 
   constructor(
     targetLang: string,
@@ -18,34 +17,45 @@ export default class TranslationCommandHandler {
     fileType: string,
     outputDir?: string
   ) {
-    this._target_lang = targetLang
-    this._inputFilename = inputFilename
-    this._outputPath = outputDir || ''
-  
-    if (fs.existsSync('decyphr.config.json')) {
-      this._userConfig = JSON.parse(fs.readFileSync('decyphr.config.json', 'utf-8'))
-      this.inputPath = `${this._userConfig['translationDir']}${inputFilename}`
-      this._outputPath = this._userConfig['translationDir'] + this._outputPath
+    this._target_lang = targetLang;
+    this._inputFilename = inputFilename;
+    this._outputPath = outputDir || "";
+
+    if (fs.existsSync("decyphr.config.json")) {
+      this._userConfig = JSON.parse(
+        fs.readFileSync("decyphr.config.json", "utf-8")
+      );
+      this.inputPath = `${this._userConfig["translationDir"]}${inputFilename}`;
+      this._outputPath = this._userConfig["translationDir"] + this._outputPath;
     } else {
-      console.warn('config not found')
-      this.inputPath = inputFilename
+      console.warn("config not found");
+      this.inputPath = inputFilename;
     }
 
-    this._fileType = fileType
+    this._fileType = fileType;
     this._fileHandler = new FileHandler(
-      this.inputPath, this._fileType, this._target_lang!, this._outputPath)
+      this.inputPath,
+      this._fileType,
+      this._target_lang!,
+      this._outputPath
+    );
   }
 
-  private _write(cb: any) {
-    this._fileHandler.outputFile()
-    cb()
+  private _write() {
+    this._fileHandler.outputFile();
   }
 
   public async processCommand() {
-    let content = await this._fileHandler.readFile()
-    await this._fileHandler.parseContents(content)
+    let readPromise = this._fileHandler.readTranslationFile();
+    readPromise
+      .then(async (data) => {
+        this._fileHandler.parsedContents = JSON.parse(data);
+        await this._fileHandler.parseContents(this._fileHandler.parsedContents);
+      })
+      .catch((error) => console.error(error));
+
     setTimeout(() => {
-      this._write(() => console.log('task complete'))
-    }, 10000)
+      this._write();
+    }, 10000);
   }
 }
