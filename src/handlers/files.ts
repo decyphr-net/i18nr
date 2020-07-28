@@ -2,16 +2,16 @@ import * as fs from "fs";
 import * as util from "util";
 import * as YAML from "yamljs";
 import * as PrettyYaml from "json-to-pretty-yaml";
-import Translator from "./translator";
 
 export default class FileHandler {
   private _inputpath: string;
-  private _outputpath: string;
+  public outputpath: string;
   private _outputfilename: string;
   private _type: string;
   private _filename: string;
-  private _translator: Translator;
-  public parsedContents: any;
+
+  public inputContents: any;
+  public outputContents: any;
   readFile = util.promisify(fs.readFile);
 
   /**
@@ -37,9 +37,8 @@ export default class FileHandler {
     this._filename = filename;
     this._inputpath = filename.substr(0, filename.lastIndexOf("/")) + "/";
     this._outputfilename = outputfilename;
-    this._outputpath = outputpath || this._inputpath;
+    this.outputpath = outputpath || this._inputpath;
     this._type = type;
-    this._translator = new Translator(this._outputfilename);
 
     console.info(`file will be output to: ${this._constructOutputPath()}...`);
   }
@@ -51,22 +50,22 @@ export default class FileHandler {
    * @returns The ouput location including the filename and extenstion
    */
   private _constructOutputPath(): string {
-    return this._outputpath + this._outputfilename + "." + this._type;
+    return this.outputpath + this._outputfilename + "." + this._type;
   }
 
   /**
    * Read the contents of the file that the user wants to translate and return
    * the contents as JSON
    */
-  async readTranslationFile() {
+  async readTranslationFile(location: any) {
     if (this._type === "json") {
-      return this.readFile(this._filename, "utf8");
+      return this.readFile(location, "utf8");
     } else if (this._type === "yaml") {
-      this.parsedContents = YAML.load(this._filename);
+      return YAML.load(location);
     }
 
-    console.info(`contents of ${this._filename} read successfully...`);
-    return this.parsedContents;
+    console.info(`contents of ${location} read successfully...`);
+    return this.inputContents;
   }
 
   /**
@@ -74,46 +73,19 @@ export default class FileHandler {
    *
    * @param contents The translated text in JSON format
    */
-  async outputFile() {
+  async outputFile(data: any) {
     let outputTo = await this._constructOutputPath();
     console.info(`writing file contents to ${outputTo}`);
     if (this._type === "json") {
-      fs.writeFile(
-        outputTo,
-        JSON.stringify(this.parsedContents, null, 2),
-        (err) => {
-          if (err) console.error(err);
-          console.log("task complete...");
-        }
-      );
+      fs.writeFile(outputTo, JSON.stringify(data, null, 2), (err) => {
+        if (err) console.error(err);
+        console.log("task complete...");
+      });
     } else if (this._type === "yaml") {
-      fs.writeFile(
-        outputTo,
-        PrettyYaml.stringify(this.parsedContents, 2),
-        (err) => {
-          if (err) console.error(err);
-          console.log("task complete...");
-        }
-      );
-    }
-  }
-
-  /**
-   * Traverse over the items in the object and if the key doesn't have any
-   * children, then translate the text, otherwise pass the child object to
-   * this method
-   *
-   * TODO: Move this function a separate parser handler
-   *
-   * @param {object} contents - The nested object structure to be traversed
-   */
-  async parseContents(contents: any) {
-    for (const [key, value] of Object.entries(contents)) {
-      if (typeof value !== "object") {
-        contents[key] = await this._translator.translateText(contents[key]);
-      } else {
-        this.parseContents(value);
-      }
+      fs.writeFile(outputTo, PrettyYaml.stringify(data, 2), (err) => {
+        if (err) console.error(err);
+        console.log("task complete...");
+      });
     }
   }
 }

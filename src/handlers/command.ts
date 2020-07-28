@@ -1,6 +1,7 @@
 import * as fs from "fs";
-
+import Translator from "./translator";
 import FileHandler from "./files";
+import { ServerResponse } from "http";
 
 export default class TranslationCommandHandler {
   private _userConfig: any;
@@ -10,6 +11,7 @@ export default class TranslationCommandHandler {
   private _outputPath: string;
   private _fileType: string;
   private _target_lang: string;
+  private _translator: Translator;
 
   constructor(
     targetLang: string,
@@ -20,6 +22,7 @@ export default class TranslationCommandHandler {
     this._target_lang = targetLang;
     this._inputFilename = inputFilename;
     this._outputPath = outputDir || "";
+    this._translator = new Translator();
 
     if (fs.existsSync("decyphr.config.json")) {
       this._userConfig = JSON.parse(
@@ -41,21 +44,47 @@ export default class TranslationCommandHandler {
     );
   }
 
-  private _write() {
-    this._fileHandler.outputFile();
-  }
-
   public async processCommand() {
-    let readPromise = this._fileHandler.readTranslationFile();
-    readPromise
-      .then(async (data) => {
-        this._fileHandler.parsedContents = JSON.parse(data);
-        await this._fileHandler.parseContents(this._fileHandler.parsedContents);
-      })
-      .catch((error) => console.error(error));
+    console.log(this.inputPath, this._outputPath);
+    let outputLocation =
+      this._fileHandler.outputpath + this._target_lang + "." + this._fileType;
+    this._fileHandler.inputContents = await this._fileHandler.readTranslationFile(
+      this.inputPath
+    );
+    try {
+      this._fileHandler.outputContents = await this._fileHandler.readTranslationFile(
+        outputLocation
+      );
+    } catch (err) {
+      if (this._fileType === "json") {
+        this._fileHandler.outputContents = JSON.stringify({});
+      } else {
+        this._fileHandler.outputContents = {};
+      }
+    }
 
-    setTimeout(() => {
-      this._write();
-    }, 10000);
+    let data = {};
+
+    if (this._fileType === "json") {
+      data = {
+        language_code: this._target_lang,
+        original_text: JSON.parse(this._fileHandler.inputContents),
+        translated_text: JSON.parse(this._fileHandler.outputContents),
+      };
+    } else {
+      data = {
+        language_code: this._target_lang,
+        original_text: this._fileHandler.inputContents,
+        translated_text: this._fileHandler.outputContents,
+      };
+    }
+
+    let response = await this._translator.translateText(data);
+
+    if (response !== "Files seem to be update to date") {
+      this._fileHandler.outputFile(response);
+    } else {
+      console.log(response);
+    }
   }
 }
