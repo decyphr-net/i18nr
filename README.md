@@ -50,6 +50,8 @@ During the development of some web applications I used Google Translate to help 
 
 Simply specify the JSON file you wish to translate and the language that you which to translate it to and it will generate your translations - including the JSON file for that language.
 
+*decyphr-i18nr* will diff your files and only translate anything new your source language file. This way, if you had to fix any translations at any point, running the command again won't change any of your existing translations, it will only check for the new keys in your source language file and apply those changes to the new translation output.
+
 ### What it isn't
 
 *decyphr-i18nr* is **not** a substitute for existing internationalization tools. *decyphr-i18nr* is intended to work with your internationalization tool to provide the translations that will be injected to the site via the internationalization tool.
