@@ -45,7 +45,6 @@ export default class TranslationCommandHandler {
   }
 
   public async processCommand() {
-    console.log(this.inputPath, this._outputPath);
     let outputLocation =
       this._fileHandler.outputpath + this._target_lang + "." + this._fileType;
     this._fileHandler.inputContents = await this._fileHandler.readTranslationFile(
@@ -93,10 +92,10 @@ export default class TranslationCommandHandler {
 
     let response = await this._translator.translateText(data);
 
-    if (response !== "Files seem to be update to date") {
+    if (response.message !== "Files seem to be update to date") {
       this._fileHandler.outputFile(response);
     } else {
-      console.log(response);
+      console.log(response.message);
     }
   }
 }
