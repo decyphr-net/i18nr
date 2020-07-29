@@ -13,6 +13,7 @@
     "@oclif/plugin-help": "^3.1.0",
     "axios": "^0.19.2",
     "json-to-pretty-yaml": "^1.2.2",
+    "laravelphp": "^2.0.3",
     "tslib": "^1.13.0",
     "yamljs": "^0.3.0"
   },
