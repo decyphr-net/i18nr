@@ -2,6 +2,7 @@ import * as fs from "fs";
 import * as util from "util";
 import * as YAML from "yamljs";
 import * as PrettyYaml from "json-to-pretty-yaml";
+import laravel2js from "laravelphp";
 
 export default class FileHandler {
   private _inputpath: string;
@@ -58,7 +59,7 @@ export default class FileHandler {
    * the contents as JSON
    */
   async readTranslationFile(location: any) {
-    if (this._type === "json") {
+    if (this._type === "json" || this._type == "php") {
       return this.readFile(location, "utf8");
     } else if (this._type === "yaml") {
       return YAML.load(location);
@@ -83,6 +84,12 @@ export default class FileHandler {
       });
     } else if (this._type === "yaml") {
       fs.writeFile(outputTo, PrettyYaml.stringify(data, 2), (err) => {
+        if (err) console.error(err);
+        console.log("task complete...");
+      });
+    } else if (this._type === "php") {
+      data = await laravel2js.js2laravel(data);
+      fs.writeFile(outputTo, data, (err) => {
         if (err) console.error(err);
         console.log("task complete...");
       });

@@ -1,7 +1,7 @@
 import * as fs from "fs";
+import laravel2js from "laravelphp";
 import Translator from "./translator";
 import FileHandler from "./files";
-import { ServerResponse } from "http";
 
 export default class TranslationCommandHandler {
   private _userConfig: any;
@@ -56,7 +56,7 @@ export default class TranslationCommandHandler {
         outputLocation
       );
     } catch (err) {
-      if (this._fileType === "json") {
+      if (this._fileType === "json" || this._fileType === "php") {
         this._fileHandler.outputContents = JSON.stringify({});
       } else {
         this._fileHandler.outputContents = {};
@@ -71,11 +71,23 @@ export default class TranslationCommandHandler {
         original_text: JSON.parse(this._fileHandler.inputContents),
         translated_text: JSON.parse(this._fileHandler.outputContents),
       };
-    } else {
+    } else if (this._fileType === "yaml") {
       data = {
         language_code: this._target_lang,
         original_text: this._fileHandler.inputContents,
         translated_text: this._fileHandler.outputContents,
+      };
+    } else if (this._fileType === "php") {
+      let inputJs = await laravel2js.laravel2js(
+        this._fileHandler.inputContents
+      );
+      let outputJs = await laravel2js.laravel2js(
+        this._fileHandler.outputContents
+      );
+      data = {
+        language_code: this._target_lang,
+        original_text: inputJs,
+        translated_text: outputJs,
       };
     }
 
