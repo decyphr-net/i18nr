@@ -3,21 +3,27 @@
 </p>
 
 <p align="center">
-  A command line tool for simplifying the process of translating your application
+  Perform actual translations on your site
 </p>
 
 <p align="center">
-  <a href="https://oclif.io" target="_blank">
-    <img src="https://img.shields.io/badge/cli-oclif-brightgreen.svg" />
+  <a href="https://npmjs.org/package/decyphr" target="_blank">
+    <img src="https://img.shields.io/npm/v/decyphr.svg?style=for-the-badge" />
+  </a>
+  <a href="https://github.com/decyphr-net/i18nr">
+    <img src="https://img.shields.io/github/commit-activity/w/decyphr-net/i18nr?style=for-the-badge" />
   </a>
   <a href="https://npmjs.org/package/decyphr" target="_blank">
-    <img src="https://img.shields.io/npm/v/decyphr.svg" />
+    <img src="https://img.shields.io/npm/dw/decyphr.svg?style=for-the-badge" />
   </a>
   <a href="https://npmjs.org/package/decyphr" target="_blank">
-    <img src="https://img.shields.io/npm/dw/decyphr.svg" />
+    <img src="https://img.shields.io/npm/dm/decyphr.svg?style=for-the-badge" />
   </a>
   <a href="https://github.com/decyphr-net/cli/blob/master/package.json" target="_blank">
-    <img src="https://img.shields.io/npm/l/decyphr.svg" />
+    <img src="https://img.shields.io/npm/l/decyphr.svg?style=for-the-badge" />
+  </a>
+  <a href="https://oclif.io" target="_blank">
+    <img src="https://img.shields.io/badge/cli-oclif-brightgreen.svg?style=for-the-badge" />
   </a>
 </p>
 
@@ -49,12 +55,9 @@
 
 ### What it is
 
-_decyphr-i18nr_ is a command line tool built for the purpose of assisting developers with the process of creating translations for their apps.
-During the development of some web applications I used Google Translate to help me quickly put together translations of my sites, which involved a lot of manual copying and pasting which was tedious, laborious, time consuming and error prone. As a solution for this, I built a server side component to handle the integration with the Google Translate API and _decyphr-i18nr_ to send the text to the API to be translated and from that, generate the translation files for the developer. This has sped up development and reduced the amount of silly mistakes of text been pasted into the wrong files, etc.
+Unlike a lot of i18n tools that use the word "translate" in their name, _decyphr-i18nr_ actually translates the text in your application to one or more languages. So long as you have your i18n and source language in place, _deycphr-i18nr_ can take care of the rest of your process, allowing you to continue implementating your functionality, without needing to put your text through a translator tool. During the development of some web applications I used Google Translate to help me quickly put together translations of my sites, which involved a lot of manual copying and pasting which was tedious, laborious, time consuming and error prone. As a solution for this, I built a server side component to handle the integration with the Google Translate API and _decyphr-i18nr_ to send the text to the API to be translated and from that, generate the translation files for the developer. This has sped up development and reduced the amount of silly mistakes of text been pasted into the wrong files, etc.
 
-Simply specify the JSON file you wish to translate and the language that you which to translate it to and it will generate your translations - including the JSON file for that language.
-
-_decyphr-i18nr_ will diff your files and only translate anything new your source language file. This way, if you had to fix any translations at any point, running the command again won't change any of your existing translations, it will only check for the new keys in your source language file and apply those changes to the new translation output.
+Simply specify the JSON, YAML or PHP file you wish to translate and the language that you which to translate and it will generate your translations. _decyphr-i18nr_ knows that it's not perfect so if you need to fix any of the content that it translated, you can simply update the specific item that's incorrect, and _decyphr-i18nr_ will leave existing translations as they are, so you can rest assured that if you did need to fix some text, then _decyphr-i18nr_ won't re-translate any text, or override any of the changes that you've made.
 
 ### What it isn't
 

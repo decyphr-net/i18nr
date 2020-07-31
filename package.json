@@ -1,6 +1,6 @@
 {
   "name": "decyphr",
-  "description": "A command line tool for simplifying the process of translating your application",
+  "description": "Perform actual translations on your site",
   "version": "0.9.0",
   "author": "Aaron Sinnott @aaronsnig501",
   "bin": {
